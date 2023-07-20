@@ -14,7 +14,7 @@
 	<section class="container mt-5">
 	<h1 class="my-4">Add Page</h1>
 	
-	<form action="./add.do" method="post">
+	<form action="./add" method="post">
 		<div class="mb-3">
 		  <label for="bookName" class="form-label">상품명</label>
 		  <input type="text" name="bookName" class="form-control" id="bookName" placeholder="상품명">
