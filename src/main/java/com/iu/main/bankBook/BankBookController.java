@@ -15,13 +15,14 @@ public class BankBookController {
 	@RequestMapping(value="list.do", method = RequestMethod.GET)
 	public String getList()throws Exception{
 		System.out.println("list");
-		bankBookService.service();
+		
 		return "bankbook/list";
 	}
 	
-	@RequestMapping(value = "detail.do")
-	public String getDetail()throws Exception{
-		System.out.println("detail");
+	@RequestMapping(value = "detail")
+	public String getDetail(BankBookDTO bankBookDTO)throws Exception{
+		bankBookDTO = bankBookService.getDetail(bankBookDTO);
+		System.out.println(bankBookDTO.getBookName());
 		return "bankbook/detail";
 	}
 
