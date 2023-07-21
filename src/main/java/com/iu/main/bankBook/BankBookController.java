@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -33,5 +35,42 @@ public class BankBookController {
 		mv.setViewName("bankbook/detail");
 		return mv;
 	}
+	
+	//form
+	@RequestMapping(value="add", method = RequestMethod.GET)
+	public void setAdd()throws Exception{
+		
+	}
+	
+	//db insert
+	@RequestMapping(value="add", method = RequestMethod.POST)
+	public String setAdd(BankBookDTO bankBookDTO)throws Exception{
+		int result = bankBookService.setAdd(bankBookDTO);
+		return "redirect:./list";
+	}
+	
+	//수정form
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void setUpdate(BankBookDTO bankBookDTO, Model model )throws Exception{
+		bankBookDTO = bankBookService.getDetail(bankBookDTO);
+		model.addAttribute("dto", bankBookDTO);
+	}
+	
+	//update
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String setUpdate(BankBookDTO bankBookDTO)throws Exception{
+		int result = bankBookService.setUpdate(bankBookDTO);
+		//return "redirect:./list";
+		return "redirect:./detail?bookNum="+bankBookDTO.getBookNum();
+	}
+	
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String setDelete(@RequestParam(name = "bookNum") Long num)throws Exception{
+		int result = bankBookService.setDelete(num);
+		return "redirect:./list";
+	}
+	
+	
 
 }
