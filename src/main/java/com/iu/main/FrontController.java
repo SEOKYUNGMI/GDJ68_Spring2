@@ -5,7 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class FrontController {
-	
+
+	//Add_mybatis
+
+	//Add_Board
+
 	
 	//home
 	// / 주소가 왔을 때 실행, index.jsp
