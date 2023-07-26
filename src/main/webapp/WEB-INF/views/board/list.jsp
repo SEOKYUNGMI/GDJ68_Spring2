@@ -13,7 +13,7 @@
 	
 	<c:import url="../temp/header.jsp"></c:import>
 	<section class="container mt-5">
-		<h1 class="mb-4 text-center">BankBook List</h1>
+		<h1 class="mb-4 text-center">Notice List</h1>
 	
 		
 		<table class="table table-dark table-hover">
@@ -34,23 +34,19 @@
 		
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
-		  <c:if test="${pager.pre}">		  
 		    <li class="page-item">
 		      <a class="page-link" href="./list?page=${pager.startNum-1}" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
-		    </c:if>
 		    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 		    <li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
 		    </c:forEach>
-		    <c:if test="${pager.next}">
 		    <li class="page-item">
 		      <a class="page-link" href="./list?page=${pager.lastNum+1}" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
-		    </c:if>
 		  </ul>
 		</nav>
 		

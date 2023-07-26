@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.main.notice.NoticeDAO">
+	<select id="getTotal" resultType="Long">
+		SELECT COUNT(NOTICENUM)FROM NOTICE
+	</select>
+	
+	
+	<select id="getList" parameterType="com.iu.main.util.Pager" resultType="NoticeDTO" >
+		SELECT NOTICENUM, NOTICENAME, NOTICETITLE, NOTICECONTENTS, NOTICEDATE, NOTICEHIT FROM
+			(SELECT ROWNUM R, B.* FROM
+				(
+				SELECT * FROM NOTICE
+				WHERE NOTICENUM>0
+				ORDER BY NOTICENUM DESC 
+				) B
+			)
+		WHERE R BETWEEN #{startRow} AND  #{lastRow}
+	</select>
+	
+	<select id="getDetail" resultType="NoticeDTO"  parameterType="NoticeDTO">
+		SELECT * FROM NOTICE WHERE NOTICENUM=#{noticeNum}
+	</select>
+	
+	<insert id="setAdd" parameterType="NoticeDTO">
+		INSERT INTO NOTICE
+		VALUES (NOTICE_SEQ.NEXTVAL, #{noticeName},#{noticeTitle},#{noticeContents},#{noticeDate},#{noticeHit})
+	</insert>
+	
+	<update id="setUpdate" parameterType="NoticeDTO">
+		UPDATE NOTICE	SET
+		NOTICENAME=#{noticeName},
+		NOTICETITLE=#{noticeTitle},
+		NOTICECONTENTS=#{noticeContents},
+		NOTICEDATE=#{noticeDate},
+		NOTICEHIT=#{noticeHit}
+		WHERE NOTICENUM=#{noticeNum}
+	</update>
+	
+	<delete id="setDelete" parameterType="Long">
+		DELETE NOTICE WHERE NOTICENUM=#{num}
+	</delete>
+
+  </mapper>
