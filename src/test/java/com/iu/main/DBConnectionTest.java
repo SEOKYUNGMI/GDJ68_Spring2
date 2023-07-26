@@ -17,6 +17,7 @@ public class DBConnectionTest extends Mytest {
 	@Test
 	public void getConnectionTest() throws Exception {
 		Connection con = dataSource.getConnection();
+		
 		assertNotNull(con);
 	}
 
